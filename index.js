@@ -13,9 +13,9 @@ app.use( cors() );
 dbConection();
 
 // Rutas
-app.get( '/', ( req, res ) => {
-    res.json( { ok: true, msj: "si se pudo" } );
-} );
+app.use('/api/usuarios', require('./routes/usuarios') );
+
+
 
 app.listen( process.env.PORT, () => {
     // console.log("Soy un wawa!!!");
