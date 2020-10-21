@@ -1,8 +1,6 @@
 const { response } = require('express');
 const bcrypt = require('bcryptjs') ;
 const Usuario = require('../models/usuario');
-// const { delete } = require('../routes/usuarios');
-
 
 const getUsuarios =  async ( req, res ) => {
     const usuarios = await Usuario.find({}, 'nombre email role google');
@@ -91,9 +89,37 @@ const actualizarUsuario = async  ( req, res = response ) => {
     }
 }
 
+const borrarUsuario = async ( req, res = response ) => {
+    try {
+        const id = req.params.id;
+
+        const usuarioDB = await Usuario.findById( id );
+
+        if( !usuarioDB ){
+            return res.status( 404 ).json( {
+                ok:false,
+                msg: 'No existe ese usuario'
+            } );            
+        }
+
+        await Usuario.findByIdAndDelete( id );
+
+        res.json({
+            ok: true,
+            id
+        });
+
+    } catch (error) {
+        res.status( 500 ).json({
+            ok:false,
+            msj: "Error inesperado!!!"
+        });
+    }
+}
 
 module.exports = {
     getUsuarios,
     actualizarUsuario,
-    postUsuarios
+    postUsuarios,
+    borrarUsuario
 }
