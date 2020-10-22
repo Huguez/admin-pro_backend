@@ -2,7 +2,6 @@
 
 const { Router } = require('express');
 const router = Router();
-
 const { check } = require('express-validator');
 const { validarCampos } = require('../middleware/validar-camps');
 
@@ -17,11 +16,11 @@ const {
 
 router.get( '/', getHospitales );
 
-router.post( '/',
-    [
-       
-    ], 
-    crearHospital );
+router.post( '/', [ 
+    validarJWT,
+    check( 'nombre', 'El nombre del hospital es necesario' ).not().isEmpty(),
+    validarCampos
+], crearHospital );
 
 router.put( '/:id',[
     

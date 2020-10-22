@@ -9,7 +9,8 @@ const HospitalSchema = Schema({
         type: String
     },
     usuario:{
-        type: Schema.Type.ObjectId,
+        require: true,
+        type: Schema.Types.ObjectId,
         ref: 'Usuario'
     }
 }, { collection: 'hospitales' });
@@ -22,4 +23,4 @@ HospitalSchema.method('toJSON', function(){
     return { version, ...object };
 });
 
-module.exports = model('Usuario', HospitalSchema );
+module.exports = model('Hospital', HospitalSchema );
