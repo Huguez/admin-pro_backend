@@ -4,13 +4,29 @@ const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios =  async ( req, res ) => {
-    const usuarios = await Usuario.find({}, 'nombre email role google');
+    
+    try {
+        const desde = Number (req.query.desde) || 0;
+        const hasta = Number (req.query.hasta) || 0;
+        
+        const [ usuarios, total ] = await Promise.all([
+            Usuario.find({}, 'nombre email role google').skip( desde ).limit( hasta ),
+            Usuario.countDocuments()
+        ]);
 
-    res.json( { 
-        ok: true, 
-        usuarios,
-        id: req.id
-    } );
+        res.json( { 
+            ok: true, 
+            usuarios,
+            total
+        } );
+
+    } catch (error) {
+        res.status( 500 ).json({
+            ok:false,
+            msg: "Error en el server"
+        })
+    }
+    
 }
 
 const postUsuarios = async ( req, res = response ) => {
