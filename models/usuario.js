@@ -38,4 +38,3 @@ usuarioSchema.method('toJSON', function(){
 });
 
 module.exports = model('Usuario', usuarioSchema );
-
