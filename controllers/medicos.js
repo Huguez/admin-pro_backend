@@ -4,9 +4,7 @@ const Medico = require('../models/medicos');
 const getMedicos = async ( req, res = response) => {
     
     try {
-        const medicos = await Medico.find()
-                                .populate('usuario',' nombre' )
-                                .populate('hospital',' nombre' );
+        const medicos = await Medico.find({}, "nombre img").populate('hospital',' nombre' );
 
         res.json( {
             ok: true,

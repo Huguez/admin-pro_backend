@@ -1,6 +1,7 @@
 const { response } = require('express');
-
+const { actualizarImagen } = require('../helpers/actualizar-imagen');
 const { v4: uuidv4 } = require('uuid');
+
 
 const subirDocumento = ( req, res = response ) => {
     try {
@@ -53,6 +54,9 @@ const subirDocumento = ( req, res = response ) => {
                     error
                 });
             }
+
+            // actualizar base de datos
+            actualizarImagen( tabla, id, nombreArchivo );
         
             res.json( {
                 ok: true,
@@ -60,7 +64,6 @@ const subirDocumento = ( req, res = response ) => {
                 nombreArchivo
             });
         });
-
 
     } catch (error) {
         res.status( 500 ).json({
