@@ -4,7 +4,6 @@ const { response } = require('express');
 const Usuarios = require('../models/usuario');
 const Medicos = require('../models/medicos');
 const Hospital = require('../models/hospital');
-const { collection } = require('../models/usuario');
 
 const getAll = async ( req, res = response ) => {
     try {
