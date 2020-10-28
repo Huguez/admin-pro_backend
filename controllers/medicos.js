@@ -1,5 +1,6 @@
 const { response } = require('express');
 const Medico = require('../models/medicos');
+const Hospital = require('../models/hospital');
 
 const getMedicos = async ( req, res = response) => {
     
@@ -39,18 +40,73 @@ const crearMedico  = async ( req, res = response) => {
 }
 
 
-const actualizarMedico = ( req, res = response) => {
-    res.json({
-        ok: true,
-        msg: "actualizarMedico"
-    });
+const actualizarMedico = async ( req, res = response) => {
+    try {
+        const id = req.params.id;
+        
+        const medicoDB = await Medico.findById( id );
+        
+        if( !medicoDB ){
+            res.status( 404 ).json({
+                ok: false,
+                msg: "no se encontro al medico"
+            });    
+        }
+        
+        const hospitalId = req.body.hospital;
+        const hospitalDB = await Hospital.findById( hospitalId );
+
+        if( !hospitalDB ){
+            res.status( 404 ).json({
+                ok: false,
+                msg: "Hospital no encontrado!!!"
+            });    
+        }
+
+        const campos = {...req.body };
+
+        const medicoEditado = await Medico.findByIdAndUpdate( id, campos, { new: true } )
+        
+        res.json({
+            ok: true,
+            medicoEditado
+        });
+
+    }catch( error ){
+        res.status(500).json({
+            ok: false,
+            msg: "Error al intentar actualizar!!!"
+        });
+    }
+    
 }
 
-const borrarMedico = ( req, res = response) => {
-    res.json({
-        ok: true,
-        msg: "borrarMedico"
-    });
+const borrarMedico = async ( req, res = response) => {
+    try {
+        const id = req.params.id;
+        const medicoDB = await Medico.findById( id );
+        
+        if( !medicoDB ){
+            res.status( 404 ).json({
+                ok: false,
+                msg: "El medico no existe!!!!"
+            });    
+        }
+
+        const medicoBorrado = await Medico.findByIdAndDelete( id,  )
+
+        res.json({
+            ok: true,
+            medicoBorrado
+        });
+    }catch( error ){
+        res.status( 500 ).json( {
+            ok: false,
+            msg: "Error en el borrar Medico!!!"
+        });
+    }
+    
+    
 }
 
 module.exports = { 

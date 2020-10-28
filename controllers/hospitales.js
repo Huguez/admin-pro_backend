@@ -92,8 +92,6 @@ const borrarHospital = async ( req, res = response ) => {
             hospitalBorrado
         });
 
-
-
     }catch( error ) {
         res.status( 500 ).json({
             ok: true,
