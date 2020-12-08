@@ -25,7 +25,7 @@ const login = async ( req, res = response ) => {
         if( !validarPassword ){
             return res.status( 400 ).json({
                 ok: false,
-                msj: 'no Password'
+                msg: 'no Password'
             })
         }
 
@@ -93,10 +93,14 @@ const renewToken = async ( req, res = response ) => {
 
         const token = await generarJWT( id );
 
+        const usuario = await Usuario.findById( id );
+
+        usuario.password = '';
+        
         res.json({
             ok: true,
-            msg: "re-new",
-            id,
+            msg: "re-new",    
+            usuario,
             token
         } );
     }catch( error ){
@@ -104,7 +108,7 @@ const renewToken = async ( req, res = response ) => {
             ok: false,
             msg: "re-new fail!!!!!",
             
-        } );    
+        } );
     }
 }
 

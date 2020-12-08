@@ -74,7 +74,6 @@ const actualizarHospital = async ( req, res = response ) => {
 const borrarHospital = async ( req, res = response ) => {
     try {
         const id = req.params.id;
-        console.log( id );
         
         const hospitalDB = await Hospital.findById( id );
 
