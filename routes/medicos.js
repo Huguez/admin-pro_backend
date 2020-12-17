@@ -6,10 +6,12 @@ const router = Router();
 const { validarCampos } = require('../middleware/validar-camps');
 const { validarJWT } = require('../middleware/validar-jwt');
 
-const { getMedicos, crearMedico, borrarMedico, actualizarMedico } = require('../controllers/medicos');
+const { getMedicos, crearMedico, borrarMedico, actualizarMedico, getMedicoById } = require('../controllers/medicos');
 
 
-router.get( '/', getMedicos );
+router.get( '/', validarJWT, getMedicos );
+
+router.get('/:id', validarJWT, getMedicoById );
 
 router.post( '/', [
     validarJWT,

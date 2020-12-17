@@ -23,8 +23,9 @@ MedicoSchema.method('toJSON', function(){
     const { __v, _id, ...object } = this.toObject(); 
 
     const id = _id;
+    const version = __v;
 
-    return { id, ...object };
+    return { id, version, ...object };
 });
 
 module.exports = model('Medico', MedicoSchema );

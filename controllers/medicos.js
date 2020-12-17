@@ -39,7 +39,6 @@ const crearMedico  = async ( req, res = response) => {
     }
 }
 
-
 const actualizarMedico = async ( req, res = response) => {
     try {
         const id = req.params.id;
@@ -104,14 +103,37 @@ const borrarMedico = async ( req, res = response) => {
             ok: false,
             msg: "Error en el borrar Medico!!!"
         });
+    }    
+}
+
+const getMedicoById = async ( rep, res = response ) => {
+    try{
+        const id = rep.params.id;
+        const medico = await Medico.findById( id );
+
+        if( !medico ){
+            res.status( 404 ).json({
+                ok: false,
+                msg: "El medico no existe!!!!"
+            });    
+        }
+
+        res.json({
+            ok: true,
+            medico
+        });
+    }catch( error ){
+        res.status( 500 ).json( {
+            ok: false,
+            msg: "Error al obtener un Medico!!!"
+        });
     }
-    
-    
 }
 
 module.exports = { 
     getMedicos,
     crearMedico,
     actualizarMedico,
-    borrarMedico
+    borrarMedico,
+    getMedicoById
 };
