@@ -7,7 +7,6 @@ const { googleVerify } = require('../helpers/google-verify');
 const { getMenuFrontEnd } = require('../helpers/menu-frontend');
 
 
-
 const login = async ( req, res = response ) => {
     try {
         const { email, password } = req.body;
