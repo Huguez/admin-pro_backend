@@ -56,7 +56,42 @@ const validarAdminRole = async ( req, res, next ) => {
     }
 }
 
+const validarAdminRole_sameUser = async ( req, res, next ) => {
+    try{
+        const uid = req.id;
+        const id = rep.params.id;
+
+        const userDB = await Usuario.findById( uid );
+
+        if( !userDB ){
+            return res.status( 404 ).json({
+                ok: false,
+                msg: "usuario no encontrado"
+            });
+        }
+
+        if( userDB.role === 'ADMIN_ROLE' || uid === id ){
+            next();
+        }else{
+            return res.status( 403 ).json({
+                ok: false,
+                msg: "usuario no autorizado"
+            });
+        }
+
+        
+
+    }catch( error ){
+        res.status( 500 ).json({
+            ok: false,
+            msg: "error en validar el Admin Role"
+        });
+    }
+}
+
+
 module.exports = { 
     validarJWT,
-    validarAdminRole
+    validarAdminRole,
+    validarAdminRole_sameUser
 }
