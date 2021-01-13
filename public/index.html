@@ -1,41 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-signin-client_id" content="624122287896-jqnav46er0cs578ukts03tdr33n5e8k5.apps.googleusercontent.com">
+  <meta charset="utf-8">
+  <title>AdminPro</title>
+  <base href="/">
+  <meta name="google-signin-client_id" content="624122287896-jqnav46er0cs578ukts03tdr33n5e8k5.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" ></script>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+  
+  <link href="./assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+  
+  <link id="theme" rel="stylesheet" type="text/css" >
+<link rel="stylesheet" href="styles.d7e153e76ea28f00b5c2.css"></head>
+  
+<body class="fix-header card-no-border fix-sidebar">
+  <!-- ============================================================== -->
+  <!-- Preloader - style you can find in spinners.css -->
+  <!-- ============================================================== -->
+  <!-- <div class="preloader">
+    <div class="loader">
+      <div class="loader__figure"></div>
+      <p class="loader__label">Cargando...</p>
+    </div>    
+  </div> -->
+  <!-- ============================================================== -->
+  <!-- Main wrapper - style you can find in pages.scss -->
+  <!-- ============================================================== -->
 
-    <title>Demo Login</title>
-</head>
-<body>
-    <h1>Google Sing-in</h1>
 
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <app-root></app-root>
 
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    
-    <br>
-    <a onclick="signOut();">Sign out</a>
 
-    <script>
-        function onSignIn( googleUser ) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  <script src="./assets/plugins/jquery/jquery.min.js"></script>
+  <script src="./assets/plugins/bootstrap/js/popper.min.js"></script>
+  <script src="./assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="./assets/js/perfect-scrollbar.jquery.min.js"></script>
+  <script src="./assets/js/waves.js"></script>
+  <script src="./assets/js/sidebarmenu.js"></script>
+  <script src="./assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+  <script src="./assets/plugins/sparkline/jquery.sparkline.min.js"></script>
 
-            var id_token = googleUser.getAuthResponse().id_token;
-            console.log( id_token );
-        }
-        
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
-        }
-    </script>
+  <script src="./assets/js/custom.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-</body>
+<script src="runtime.1c5408a2557c2fa142cf.js" defer></script><script src="polyfills.35a5ca1855eb057f016a.js" defer></script><script src="main.368c8dd865aa51fec12e.js" defer></script></body>
 </html>
